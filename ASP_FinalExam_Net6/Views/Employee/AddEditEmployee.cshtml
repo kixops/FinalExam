@@ -1,0 +1,46 @@
+﻿@model ASP_FinalExam_Net6.Models.Employee
+
+@{
+    ViewData["Title"] = "AddEditEmployee";
+}
+
+<h1>AddEditEmployee</h1>
+
+<h4>Employee</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SaveData">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (@ViewBag.IsEdit)
+            {
+                <input type="hidden" asp-for="Id" />
+            }
+            <div class="form-group">
+                <label asp-for="DepartmentId" class="control-label"></label>
+                <select asp-for="DepartmentId" class="form-control" asp-items="@(new SelectList(ViewBag.Department, "Id", "Name",ViewBag.DepartmentId))"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsManager" class="control-label"></label>
+                @Html.EditorFor(x => x.IsManager)
+                @*<input type="checkbox" asp-for="IsManager" class="form-control" />*@
+                <span asp-validation-for="IsManager" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="EmployeeList">Back to List</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

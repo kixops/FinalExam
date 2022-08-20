@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ASP_FinalExam_Net6.Models.Employee>
+@{
+    ViewData["Title"] = "EmployeeList";
+}
+
+<h1>Employee List</h1>
+<p>
+    <a class="btn btn-secondary" asp-action="AddEditEmployee">Create New Employee</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dept)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsManager)
+            </th>
+
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dept.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsManager)
+                </td>
+                <td>
+                    <a asp-action="AddEditEmployee" class="btn btn-primary" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="EmployeeDetail" class="btn btn-info" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="DeleteEmployee" class="btn btn-danger" asp-route-id="@item.Id">Delete</a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
